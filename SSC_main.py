@@ -11,7 +11,7 @@ from scipy.integrate import odeint
 #import matplotlib.pyplot as plt
 #Setting up Vmax table (These are all free parameters)
 v2 = 1.0 #PI4K value
-v5 = 10.0 #DGK value
+v5 = 9.0#DGK value
 v7 = 1.0 #CDPDAGS value
 v8 = 10.0 #PIS value
 v_reversible = 0.01 #all reversible backword reaction rates
@@ -30,7 +30,6 @@ pERPA= soln[:, 5]
 pCDPDAG= soln[:, 6]
 pERPI= soln[:, 7]
 
-#print soln[-1,:]
 all_concentrations_main = soln[-1,:]  #Get all final concentrations
 total_concentration_main = sum(all_concentrations_main)  #Total Concentration
 
@@ -74,7 +73,15 @@ error_from_pa = (math.fabs(rpa-0.167))/0.167
 error_from_dag = (math.fabs(rdag-0.008))/0.008
 
 ferror = error_from_pip2 + error_from_pi4p + error_from_pa + error_from_dag
+error_details = [error_from_pip2 ,error_from_pi4p, error_from_pa, error_from_dag]
 #Adding Penalty Error
 ferror = ferror + 415 + penalty_error
 
-print ferror, error_from_pip2, error_from_pi4p ,error_from_pa , error_from_dag, total_concentration_main
+#Saving results
+fh2 = open('current_result_log.txt','a')
+write_con = np.array(all_concentrations_main).tolist()
+things_to_write = [ferror] + vmax_table + error_details + write_con
+things_to_write = [ float(round(elem1,3)) for elem1 in things_to_write ]
+fh2.write('\t'.join(str(k1) for k1 in things_to_write))
+fh2.write('\n')
+fh2.close()

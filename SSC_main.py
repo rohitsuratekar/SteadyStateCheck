@@ -1,5 +1,6 @@
 #August 2015
 #Checking steady state parameters
+#Warning: Parameter value file contains only Km Values
 
 import math
 import SSC_initial_conditions, SSC_ode_function, SSC_ode_function, SSC_parameter_values
@@ -8,12 +9,14 @@ from scipy.integrate import odeint
 #import matplotlib
 #matplotlib.use('TkAgg') #For interactive plots
 #import matplotlib.pyplot as plt
+#Setting up Vmax table
+v2 = 
 
 
 y = SSC_initial_conditions.initial_conditions_vector()     # initial condition vector
 time_coord = SSC_initial_conditions.time_conditions()
 t  = np.linspace(time_coord[0], time_coord[1], 10000)   # time grid
-soln = odeint(SSC_ode_function.ode_function, y, t)
+soln = odeint(SSC_ode_function.ode_function, y, t , args=(vmax_table))
 pPMPI = soln[:, 0]
 pPI4P = soln[:, 1]
 pPIP2 = soln[:, 2]

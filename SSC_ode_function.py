@@ -3,30 +3,30 @@ from SSC_parameter_values import parameter_values
 m2 = parameter_values()
 
 
-def ode_function(y, t):
-	#print test+test2
-	v1 = m2[0]
-	v2 = m2[1]
-	v2i = m2[2]
-	v3 = m2[3]
-	v3i = m2[4]
-	v4 = m2[5]
-	v5 = m2[6]
-	v5i = m2[7]
-	v6 = m2[8]
-	v7 = m2[9]
-	v8 = m2[10]
-	k1 = m2[11]
-	k2 = m2[12]
-	k2i = m2[13]
-	k3 = m2[14]
-	k3i = m2[15]
-	k4 = m2[16]
-	k5 = m2[17]
-	k5i = m2[18]
-	k6 = m2[19]
-	k7 = m2[20]
-	k8 = m2[21]
+def ode_function(y, t, vmax_table):
+	v2 = vmax_table[0]
+	v5 = vmax_table[1]
+	v7 = vmax_table[2]
+	v8 = vmax_table[3]
+	v2i = vmax_table[4]
+	v3i = vmax_table[4]
+	v5i = vmax_table[4]
+	v1 = (10.0*v5*v2)/((125.0*v2) - v5)  #Assuming Km of PITP is 10 times others
+	v3 = (20.0*v5)/(125.0)
+	v4 = v3
+	v6 = (5.98*v5*v7)/((125.0*v7) - (5.98*v5))
+
+	k1 = m2[0]
+	k2 = m2[1]
+	k2i = m2[2]
+	k3 = m2[3]
+	k3i = m2[4]
+	k4 = m2[5]
+	k5 = m2[6]
+	k5i = m2[7]
+	k6 = m2[8]
+	k7 = m2[9]
+	k8 = m2[10]
 
 
 	pmpi = y[0]

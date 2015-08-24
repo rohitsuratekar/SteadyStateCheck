@@ -9,14 +9,18 @@ from scipy.integrate import odeint
 #import matplotlib
 #matplotlib.use('TkAgg') #For interactive plots
 #import matplotlib.pyplot as plt
-#Setting up Vmax table
-v2 = 
-
+#Setting up Vmax table (These are all free parameters)
+v2 = 1.0 #PI4K value
+v5 = 10.0 #DGK value
+v7 = 1.0 #CDPDAGS value
+v8 = 10.0 #PIS value
+v_reversible = 0.01 #all reversible backword reaction rates
+vmax_table = [v2,v5,v7,v8,v_reversible] #Rest of Vmax will be set according to these values
 
 y = SSC_initial_conditions.initial_conditions_vector()     # initial condition vector
 time_coord = SSC_initial_conditions.time_conditions()
 t  = np.linspace(time_coord[0], time_coord[1], 10000)   # time grid
-soln = odeint(SSC_ode_function.ode_function, y, t , args=(vmax_table))
+soln = odeint(SSC_ode_function.ode_function, y, t , args=(vmax_table,))
 pPMPI = soln[:, 0]
 pPI4P = soln[:, 1]
 pPIP2 = soln[:, 2]

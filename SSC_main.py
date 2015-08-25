@@ -12,10 +12,10 @@ from scipy.integrate import odeint
 #Setting up Vmax table (These are all free parameters)
 v_reversible = 0.01 #all reversible backword reaction rates
 #Specify Range
-v2_range  = np.linspace(1, 10, 2)
-v5_range  = np.linspace(1, 10, 2)
-v7_range  = np.linspace(1, 10, 2)
-v8_range  = np.linspace(1, 10, 2)
+v2_range  = np.linspace(0.01, 10, 100)
+v5_range  = np.linspace(0.01, 10, 100)
+v7_range  = np.linspace(0.01, 10, 100)
+v8_range  = np.linspace(0.01, 10, 100)
 
 for temp_v2 in v2_range:
     for temp_v5 in v5_range:

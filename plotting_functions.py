@@ -5,7 +5,7 @@ import matplotlib
 #with open("current_result_log.txt") as original_parameters:
 #    k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
 #k2 = np.asarray(k2)
-#k2 = k2[k2[:,0]< 0.018 , :]
+#k2 = k2[k2[:,0]< 0.1 , :]
 #k1 = k2
 
 with open("mutant_log.txt") as original_parameters:
@@ -21,7 +21,7 @@ plt.hist(i2,100, alpha=0.5, label='PA (after/before)')
 
 #plt.scatter(k1[:,16],k1[:,0],color = 'k', label='CDPDAG',alpha=1)
 #plt.scatter(k1[:,14],k1[:,0],color = 'y',label='PMPA',alpha=1)
-#plt.scatter(k1[:,15],k1[:,0],color = 'c', label='ERPA',alpha=1)
+#plt.scatter(k1[:,15],k1[:,10],color = 'c', label='ERPA',alpha=1)
 #plt.scatter(k1[:,10],k1[:,0],color = 'b',label='PMPI',alpha=1)
 #plt.scatter(k1[:,11],k1[:,0],color = 'r',label='PI4P',alpha=1)
 #plt.scatter(k1[:,12],k1[:,0],color = 'g', label='PIP2',alpha=1)
@@ -44,5 +44,5 @@ plt.ylabel('Frequency')
 #plt.axhline()
 #plt.axvline()
 plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))
-#plt.savefig('samplefigure.png', bbox_inches='tight')
-plt.show()
+plt.savefig('samplefigure.png', bbox_inches='tight')
+#plt.show()

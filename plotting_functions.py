@@ -6,8 +6,10 @@ with open("current_result_log.txt") as original_parameters:
     k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
 k2 = np.asarray(k2)
 k2 = k2[k2[:,0]< 0.1 , :]
+k2 = k2[k2[:,15] > 28.2 , :]
+k2 = k2[k2[:,15] < 28.7 , :]
 k1 = k2
-
+print k1
 #with open("mutant_log.txt") as original_parameters:
 #    k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
 #k2 = np.asarray(k2)
@@ -54,15 +56,15 @@ k1 = k2
 #plt.hist(k1[:,11],100, alpha=0.5, label='PI4P')
 #plt.hist(k1[:,12],100, alpha=0.5, label='PIP2')
 #plt.hist(k1[:,13],100, alpha=0.5, label='DAG')
-#plt.hist(k1[:,15],100, alpha=0.5, label='ERPA')
+plt.hist(k1[:,15],100, alpha=0.5, label='ERPA')
 #plt.hist(k1[:,14],100, alpha=0.5, label='PMPA')
 #plt.hist(k1[:,16],100, alpha=0.6, label='CDPDAG')
 
-plt.xlabel('Error')
-plt.ylabel('Frequency')
+#plt.xlabel('Error')
+#plt.ylabel('Frequency')
 #plt.title('Mutant Factor of 0.01')
 #plt.axhline()
 #plt.axvline()
-plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))
-plt.savefig('samplefigure.png', bbox_inches='tight')
+#plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))
+#plt.savefig('samplefigure.png', bbox_inches='tight')
 plt.show()

@@ -13,11 +13,24 @@ with open("mutant_log.txt") as original_parameters:
 k2 = np.asarray(k2)
 k1 = k2
 
-i = k1[:,8]/k1[:,7]
-i2 = k1[:,10]/k1[:,9]
+i1 = k1[:,15]/k1[:,7]
+i2 = k1[:,16]/k1[:,8]
+i3 = k1[:,17]/k1[:,9]
+i4 = k1[:,18]/k1[:,10]
+i5 = k1[:,19]/k1[:,11]
+i6 = k1[:,20]/k1[:,12]
+i7 = k1[:,21]/k1[:,13]
+i8 = k1[:,22]/k1[:,14]
+
 #plt.scatter(k1[:,7],k1[:,8],color = 'k')
-plt.hist(i,100, alpha=0.5, label='PI (after/before)')
-plt.hist(i2,100, alpha=0.5, label='PA (after/before)')
+#plt.hist(i1,100, alpha=0.5, label='PMPI (after/before)')
+#plt.hist(i2,100, alpha=0.5, label='PI4P (after/before)')
+#plt.hist(i3,100, alpha=0.5, label='PIP2 (after/before)')
+plt.hist(i4,100, alpha=0.5, label='DAG (after/before)')
+#plt.hist(i5,100, alpha=0.5, label='PMPA (after/before)')
+#plt.hist(i6,100, alpha=0.5, label='ERPA (after/before)')
+#plt.hist(i7,100, alpha=0.5, label='CDPDAG (after/before)')
+#plt.hist(i8,100, alpha=0.5, label='ERPI (after/before)')
 
 #plt.scatter(k1[:,16],k1[:,0],color = 'k', label='CDPDAG',alpha=1)
 #plt.scatter(k1[:,14],k1[:,0],color = 'y',label='PMPA',alpha=1)
@@ -45,4 +58,4 @@ plt.ylabel('Frequency')
 #plt.axvline()
 plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))
 plt.savefig('samplefigure.png', bbox_inches='tight')
-#plt.show()
+plt.show()

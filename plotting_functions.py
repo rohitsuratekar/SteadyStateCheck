@@ -11,6 +11,7 @@ import matplotlib
 with open("mutant_log.txt") as original_parameters:
     k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
 k2 = np.asarray(k2)
+k2 = k2[k2[:,6]< 0.125 , :] #Mutant factor less than this value
 k1 = k2
 
 i1 = k1[:,15]/k1[:,7]
@@ -22,11 +23,13 @@ i6 = k1[:,20]/k1[:,12]
 i7 = k1[:,21]/k1[:,13]
 i8 = k1[:,22]/k1[:,14]
 
-#plt.scatter(k1[:,7],k1[:,8],color = 'k')
+m1 = (k1[:,19]+k1[:,20])/(k1[:,11]+k1[:,12])
+m2 = (k1[:,15]+k1[:,22])/(k1[:,7]+k1[:,14])
+plt.hist(m1,100, alpha=0.5, label='Total PA (after/before)')
 #plt.hist(i1,100, alpha=0.5, label='PMPI (after/before)')
 #plt.hist(i2,100, alpha=0.5, label='PI4P (after/before)')
 #plt.hist(i3,100, alpha=0.5, label='PIP2 (after/before)')
-plt.hist(i4,100, alpha=0.5, label='DAG (after/before)')
+#plt.hist(i4,100, alpha=0.5, label='DAG (after/before)')
 #plt.hist(i5,100, alpha=0.5, label='PMPA (after/before)')
 #plt.hist(i6,100, alpha=0.5, label='ERPA (after/before)')
 #plt.hist(i7,100, alpha=0.5, label='CDPDAG (after/before)')

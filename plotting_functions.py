@@ -2,16 +2,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 
-with open("current_result_log.txt") as original_parameters:
+#with open("current_result_log.txt") as original_parameters:
+#    k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
+#k2 = np.asarray(k2)
+#k2 = k2[k2[:,0]< 0.1 , :]
+#k1 = k2
+
+with open("mutant_log.txt") as original_parameters:
     k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
 k2 = np.asarray(k2)
-k2 = k2[k2[:,0]< 0.018 , :]
-print k2
 k1 = k2
+
+i = k1[:,8]/k1[:,7]
+i2 = k1[:,10]/k1[:,9]
+#plt.scatter(k1[:,7],k1[:,8],color = 'k')
+plt.hist(i,100, alpha=0.5, label='PI (after/before)')
+plt.hist(i2,100, alpha=0.5, label='PA (after/before)')
 
 #plt.scatter(k1[:,16],k1[:,0],color = 'k', label='CDPDAG',alpha=1)
 #plt.scatter(k1[:,14],k1[:,0],color = 'y',label='PMPA',alpha=1)
-#plt.scatter(k1[:,15],k1[:,0],color = 'c', label='ERPA',alpha=1)
+#plt.scatter(k1[:,15],k1[:,10],color = 'c', label='ERPA',alpha=1)
 #plt.scatter(k1[:,10],k1[:,0],color = 'b',label='PMPI',alpha=1)
 #plt.scatter(k1[:,11],k1[:,0],color = 'r',label='PI4P',alpha=1)
 #plt.scatter(k1[:,12],k1[:,0],color = 'g', label='PIP2',alpha=1)
@@ -27,13 +37,12 @@ k1 = k2
 #plt.hist(k1[:,15],100, alpha=0.5, label='ERPA')
 #plt.hist(k1[:,14],100, alpha=0.5, label='PMPA')
 #plt.hist(k1[:,16],100, alpha=0.6, label='CDPDAG')
-plt.hist(k1[:,0],100)
 
-plt.xlabel('Error')
+plt.xlabel('Ratio')
 plt.ylabel('Frequency')
-plt.title('With error smaller than 10%')
+#plt.title('With error smaller than 10%')
 #plt.axhline()
-plt.axvline()
+#plt.axvline()
 plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))
 plt.savefig('samplefigure.png', bbox_inches='tight')
-plt.show()
+#plt.show()

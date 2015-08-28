@@ -1,4 +1,5 @@
 #Inital Conditions
+#No randomization
 def initial_conditions_vector():
 	ipmpi = 17
 	ipi4p = 17

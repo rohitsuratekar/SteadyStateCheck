@@ -8,9 +8,13 @@ import matplotlib
 with open("current_result_log.txt") as original_parameters:
     k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
 k2 = np.asarray(k2)
-k2 = k2[k2[:,0]< 0.1 , :]
-k2 = k2[k2[:,15] > 28.2 , :]
-k2 = k2[k2[:,15] < 28.7 , :]
+k2 = k2[k2[:,0]< 0.1 , :] #Select error less than 10%
+k2 = k2[k2[:,10] > 25 , :] #Condition on PMPI
+k2 = k2[k2[:,10] < 32 , :] #Condition on PMPI
+#k2 = k2[k2[:,14] > 28 , :] #Condition on PMPA
+k2 = k2[k2[:,14] < 12 , :] #Condition on PMPA
+#k2 = k2[k2[:,15] < 10 , :] #Condition on ERPA
+#k2 = k2[k2[:,10] < 26 , :]
 m = np.random.randint(0,len(k2))
 r = k2[m]
 v2 = r[1]

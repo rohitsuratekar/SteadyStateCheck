@@ -7,7 +7,8 @@ import SSC_initial_conditions, SSC_ode_function, SSC_ode_function, SSC_parameter
 import numpy as np
 from scipy.integrate import odeint
 #Setting up chang in parameter in mutation
-change_factor_list = [0.01, 0.125, 0.25, 0.5, 1]
+change_factor_list = [0.01, 0.125, 0.25, 0.5, 1] #For rdgA
+#change_factor_list = [0.01, 0.5, 1, 5, 10] #For PIS and CDPDAGS
 
 #Open parameter values which gave correct results
 with open("current_result_log.txt") as original_parameters:

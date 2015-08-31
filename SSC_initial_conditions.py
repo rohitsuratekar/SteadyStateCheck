@@ -14,4 +14,6 @@ def initial_conditions_vector():
 def time_conditions():
 	starting_point = 0
 	end_point = 50000
-	return starting_point, end_point
+	stimulus_time = 2
+	recovery_time = 50000
+	return starting_point, end_point, stimulus_time, recovery_time

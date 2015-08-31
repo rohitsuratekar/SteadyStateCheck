@@ -9,6 +9,7 @@ from scipy.integrate import odeint
 #Setting up chang in parameter in mutation
 change_factor_list = [0.01, 0.125, 0.25, 0.5, 1] #For rdgA
 #change_factor_list = [0.01, 0.5, 1, 5, 10] #For PIS and CDPDAGS
+#change_factor_list = [1, 20, 50, 100, 1000] #For PIS and CDPDAGS
 
 #Open parameter values which gave correct results
 with open("current_result_log.txt") as original_parameters:

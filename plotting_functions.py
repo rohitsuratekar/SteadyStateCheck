@@ -73,15 +73,7 @@ if open_normal == 2:
     k1 = k2
     plt.hist(k1[:,5])
 
-
-
-
-
-
-
-
-
-plt.xlabel('90% PIP2 recovery (min)')
+plt.xlabel('70% PIP2 recovery (min)')
 plt.ylabel('Frequency')
 plt.title('All parameters less than 10% error')
 #plt.axhline()

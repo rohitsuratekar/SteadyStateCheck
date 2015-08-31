@@ -18,7 +18,8 @@ if open_normal == 0:
     with open("mutant_log.txt") as original_parameters:
         k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
     k2 = np.asarray(k2)
-    k2 = k2[k2[:,6] > 1 , :] #Mutant factor less than this value
+    k2 = k2[k2[:,6] < 1000 , :] #Mutant factor less than this value
+    k2 = k2[k2[:,6] > 1 , :]
     k1 = k2
     i1 = k1[:,15]/k1[:,7]
     i2 = k1[:,16]/k1[:,8]
@@ -65,9 +66,9 @@ plt.hist(i8,100, alpha=0.5, label='ERPI ')
 #plt.hist(k1[:,14],100, alpha=0.5, label='PMPA')
 #plt.hist(k1[:,16],100, alpha=0.6, label='CDPDAG')
 
-plt.xlabel('Ratio of steady states (cds/WT)')
+plt.xlabel('Ratio of steady states (pis/WT)')
 plt.ylabel('Frequency')
-plt.title('CDPDAGS overexpression')
+plt.title('PIS overexpression (upto 100x)')
 #plt.axhline()
 #plt.axvline()
 plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))

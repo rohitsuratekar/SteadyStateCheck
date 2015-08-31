@@ -33,12 +33,17 @@ for para_elements in range(len(para_set)):
     soln = odeint(SSC_ode_function.ode_function, y, t , args=(vmax_table,))
     stored_pip2_value = soln[-1,2]
     #Light Stimulation
-    y1 = soln[-1,:]  #Get all final concentrations, This will initial condition for next step
-    t1 = np.linspace(time_coord[0], time_coord[2], 100)
-    stimulus_soln = odeint(SSC_ode_function.light_ode, y1, t1 , args=(vmax_table,stimulation_factor))
+    #y1 = soln[-1,:]  #Get all final concentrations, This will initial condition for next step
+    #t1 = np.linspace(time_coord[0], time_coord[2], 100)
+    #stimulus_soln = odeint(SSC_ode_function.light_ode, y1, t1 , args=(vmax_table,stimulation_factor))
+
+    #infinite Vmax of PLC
+    y2=soln[-1,:]
+    y2[3] = y2[3]+y[2] #DAG Value
+    y2[2] = 0.01
 
     #Recovery phase
-    y2 = stimulus_soln[-1,:]
+    #y2 = stimulus_soln[-1,:]
     t2 = np.linspace(time_coord[0], time_coord[3], 10000)
     recovery_soln = odeint(SSC_ode_function.ode_function, y2, t2 , args=(vmax_table,))
 
@@ -51,7 +56,7 @@ for para_elements in range(len(para_set)):
         final_recovery_time = recovery_time_array[0]
 
     mfh2 = open('light_recovery.txt','a')
-    things_to_write2 = vmax_table + [final_recovery_time] + [stimulation_factor] + [time_coord[2]]
+    things_to_write2 = vmax_table + [final_recovery_time]
     things_to_write2 = [ float(round(elem1,3)) for elem1 in things_to_write2 ]
     mfh2.write('\t'.join(str(k1) for k1 in things_to_write2))
     mfh2.write('\n')

@@ -7,7 +7,7 @@ import SSC_initial_conditions, SSC_ode_function, SSC_ode_function, SSC_parameter
 import numpy as np
 from scipy.integrate import odeint
 #Parameter initializing
-stimulation_factor = 1000.00 #this will be change in PLC Vmax
+#stimulation_factor = 1000.00 #this will be change in PLC Vmax
 
 #Open parameter values which gave correct results
 with open("temp_file.txt") as original_parameters:
@@ -39,9 +39,8 @@ for para_elements in range(len(para_set)):
 
     #infinite Vmax of PLC
     y2=soln[-1,:]
-    y2[3] = y2[3]+y[2] #DAG Value
-    y2[2] = 0.01
-
+    y2[3] = y2[3]+y[2] -0.01 #DAG Value
+    y2[2] = 0.01 #New PIP2 value
     #Recovery phase
     #y2 = stimulus_soln[-1,:]
     t2 = np.linspace(time_coord[0], time_coord[3], 10000)
@@ -55,7 +54,7 @@ for para_elements in range(len(para_set)):
     if len(recovery_time_array) != 0:
         final_recovery_time = recovery_time_array[0]
 
-    mfh2 = open('light_recovery.txt','a')
+    mfh2 = open('modified_light_recovery.txt','a')
     things_to_write2 = vmax_table + [final_recovery_time]
     things_to_write2 = [ float(round(elem1,3)) for elem1 in things_to_write2 ]
     mfh2.write('\t'.join(str(k1) for k1 in things_to_write2))

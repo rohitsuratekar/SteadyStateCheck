@@ -34,13 +34,14 @@ if open_normal == 1:
     #plt.hist(k1[:,14],100, alpha=0.5, label='PMPA')
     #plt.hist(k1[:,16],100, alpha=0.6, label='CDPDAG')
 
+
 #print k1
 if open_normal == 0:
     with open("mutant_log.txt") as original_parameters:
         k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
     k2 = np.asarray(k2)
-    k2 = k2[k2[:,6] < 1000 , :] #Mutant factor less than this value
-    k2 = k2[k2[:,6] > 1 , :]
+    #k2 = k2[k2[:,6] < 1000 , :] #Mutant factor less than this value
+    k2 = k2[k2[:,6] != 1 , :]
     k1 = k2
     i1 = k1[:,15]/k1[:,7]
     i2 = k1[:,16]/k1[:,8]
@@ -52,30 +53,37 @@ if open_normal == 0:
     i8 = k1[:,22]/k1[:,14]
     m1 = (k1[:,19]+k1[:,20])/(k1[:,11]+k1[:,12])
     m2 = (k1[:,15]+k1[:,22])/(k1[:,7]+k1[:,14])
-
-    #plt.hist(m1,100, alpha=0.5, label='Total PA ')
-    #plt.hist(m2,100, alpha=0.5, label='Total PI ')
+    plt.hist(m1,100, alpha=0.5, label='Total PA ')
+    plt.hist(m2,100, alpha=0.5, label='Total PI ')
     #plt.hist(i1,100, alpha=0.5, label='PMPI ')
     #plt.hist(i2,100, alpha=0.5, label='PI4P ')
     #plt.hist(i3,100, alpha=0.5, label='PIP2 ')
-    #plt.hist(i4,100, alpha=0.5, label='DAG (after/before)')
+    plt.hist(i4,100, alpha=0.5, label='DAG')
     #plt.hist(i5,100, alpha=0.5, label='PMPA ')
     #plt.hist(i6,100, alpha=0.5, label='ERPA ')
     #plt.hist(i7,100, alpha=0.5, label='CDPDAG ')
     #plt.hist(i8,100, alpha=0.5, label='ERPI ')
 
+
 if open_normal == 2:
     with open("light_recovery.txt") as original_parameters:
         k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
     k2 = np.asarray(k2)
+    k2 = k2[k2[:,5] != 1989 , :]
     k1 = k2
-    plt.hist(k1[:,5],100)
+    plt.hist(k1[:,5])
 
 
 
-plt.xlabel('90% PIP2 recovery time (min)')
+
+
+
+
+
+
+plt.xlabel('90% PIP2 recovery (min)')
 plt.ylabel('Frequency')
-#plt.title('PIS overexpression (upto 100x)')
+plt.title('All parameters less than 10% error')
 #plt.axhline()
 #plt.axvline()
 #plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))

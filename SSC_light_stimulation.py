@@ -1,13 +1,13 @@
 #August 2015
 #Checking steady state parameters with light stimulation
 #Warning: Parameter value file contains only Km Values
-
+import matplotlib.pyplot as plt
 import math
 import SSC_initial_conditions, SSC_ode_function, SSC_ode_function, SSC_parameter_values
 import numpy as np
 from scipy.integrate import odeint
 #Parameter initializing
-stimulation_factor = 170 #this will be change in PLC Vmax
+stimulation_factor = 1000 #this will be change in PLC Vmax
 
 #Open parameter values which gave correct results
 with open("temp_file.txt") as original_parameters:
@@ -34,5 +34,12 @@ for para_elements in range(len(para_set)):
 
     #Light Stimulation
     y1 = soln[-1,:]  #Get all final concentrations, This will initial condition for next step
-    t1 = np.linspace(time_coord[0], time_coord[2], 10000)
+    t1 = np.linspace(time_coord[0], time_coord[2], 100)
     stimulus_soln = odeint(SSC_ode_function.light_ode, y1, t1 , args=(vmax_table,stimulation_factor))
+
+    #Recovery phase
+    y2 = stimulus_soln[-1,:]
+
+    print (y2[2]/y1[2])*100
+    t2 = np.linspace(time_coord[0], time_coord[3], 10000)
+    recovery_soln = odeint(SSC_ode_function.ode_function, y2, t2 , args=(vmax_table,))

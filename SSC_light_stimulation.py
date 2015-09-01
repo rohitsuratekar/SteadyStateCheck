@@ -10,7 +10,7 @@ from scipy.integrate import odeint
 pip2_depletion_value_table = [0.16, 1.6 , 8, 12.8] #Values of PIP2 after light stimulation (1%, 10%, 50%, 80%)
 
 #Open parameter values which gave correct results
-with open("temp_file.txt") as original_parameters:
+with open("current_result_log.txt") as original_parameters:
     para_set = [[float(digit) for digit in line.split()] for line in original_parameters]
 
 para_set = np.asarray(para_set)
@@ -56,7 +56,7 @@ for pip2_depletion_value in range(len(pip2_depletion_value_table)):
             final_recovery_time = recovery_time_array[0]
 
         mfh2 = open('modified_light_recovery.txt','a')
-        things_to_write2 = vmax_table + [pip2_depletion_value] + [final_recovery_time] 
+        things_to_write2 = vmax_table + [pip2_depletion_value] + [final_recovery_time]
         things_to_write2 = [ float(round(elem1,3)) for elem1 in things_to_write2 ]
         mfh2.write('\t'.join(str(k1) for k1 in things_to_write2))
         mfh2.write('\n')

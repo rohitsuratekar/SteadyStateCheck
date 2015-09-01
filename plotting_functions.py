@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 
-open_normal = 2  #0 = mutant , 1 = Normal , 2 = light
+open_normal = 0  #0 = mutant , 1 = Normal , 2 = light
 
 if open_normal == 1:
     with open("current_result_log.txt") as original_parameters:

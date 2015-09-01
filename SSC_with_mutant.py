@@ -34,7 +34,7 @@ for para_elements in range(len(para_set)):
 
     all_concentrations_main = soln[-1,:]  #Get all final concentrations
     save_before = np.array(all_concentrations_main).tolist()
-    change_para = 6  #Changing DAGK Vmax
+    change_para = [0, 8]  #PITP, 8 = PATP
 
     for cf in change_factor_list :
             print change_para, cf
@@ -43,7 +43,7 @@ for para_elements in range(len(para_set)):
             mutant_concentration_all = soln_mutant[-1,:]  #Get all final concentrations
             save_after = np.array(mutant_concentration_all).tolist()
             #Saving results
-            mfh2 = open('mutant_log.txt','a')
+            mfh2 = open('double.txt','a')
             things_to_write2 = vmax_table + [change_para] + [change_factor] + save_before + save_after
             things_to_write2 = [ float(round(elem1,3)) for elem1 in things_to_write2 ]
             mfh2.write('\t'.join(str(k1) for k1 in things_to_write2))

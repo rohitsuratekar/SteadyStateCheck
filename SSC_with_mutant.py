@@ -7,7 +7,8 @@ import SSC_initial_conditions, SSC_ode_function, SSC_ode_function, SSC_parameter
 import numpy as np
 from scipy.integrate import odeint
 #Setting up chang in parameter in mutation
-change_factor_list = [0.01, 0.125, 0.25, 0.5, 1] #For rdgA
+change_factor_list1 = [0.01, 0.125, 0.5, 1] #For rdgA
+change_factor_list2 = [0.01, 0.125, 0.5, 1] #For rdgA
 #change_factor_list = [0.01, 0.5, 1, 5, 10] #For PIS and CDPDAGS
 #change_factor_list = [1, 20, 50, 100, 1000] #For PIS and CDPDAGS
 
@@ -36,16 +37,17 @@ for para_elements in range(len(para_set)):
     save_before = np.array(all_concentrations_main).tolist()
     change_para = [0, 8]  #PITP, 8 = PATP
 
-    for cf in change_factor_list :
-            print change_para, cf
-            change_factor = cf
-            soln_mutant = odeint(SSC_ode_function.mutant_ode, y, t , args=(vmax_table,change_para, change_factor))
-            mutant_concentration_all = soln_mutant[-1,:]  #Get all final concentrations
-            save_after = np.array(mutant_concentration_all).tolist()
-            #Saving results
-            mfh2 = open('double.txt','a')
-            things_to_write2 = vmax_table + [change_para] + [change_factor] + save_before + save_after
-            things_to_write2 = [ float(round(elem1,3)) for elem1 in things_to_write2 ]
-            mfh2.write('\t'.join(str(k1) for k1 in things_to_write2))
-            mfh2.write('\n')
-            mfh2.close()
+    for cf2 in change_factor_list2:
+        for cf in change_factor_list1 :
+                change_factor1 = [change_para[0], cf]
+                change_factor2 = [change_para[1], cf2]
+                soln_mutant = odeint(SSC_ode_function.mutant_ode, y, t , args=(vmax_table,change_factor1, change_factor2))
+                mutant_concentration_all = soln_mutant[-1,:]  #Get all final concentrations
+                save_after = np.array(mutant_concentration_all).tolist()
+                #Saving results
+                mfh2 = open('double.txt','a')
+                things_to_write2 = vmax_table + change_factor1 + change_factor2 + save_before + save_after
+                things_to_write2 = [ float(round(elem1,3)) for elem1 in things_to_write2 ]
+                mfh2.write('\t'.join(str(k1) for k1 in things_to_write2))
+                mfh2.write('\n')
+                mfh2.close()

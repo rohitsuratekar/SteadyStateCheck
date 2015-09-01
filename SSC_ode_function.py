@@ -52,7 +52,7 @@ def ode_function(y, t, vmax_table):
 
 
 
-def mutant_ode(y, t, vmax_table, change_para, change_factor):
+def mutant_ode(y, t, vmax_table, change_factor1, change_factor2):
 	v2 = vmax_table[0]
 	v5 = vmax_table[1]
 	v7 = vmax_table[2]
@@ -78,8 +78,8 @@ def mutant_ode(y, t, vmax_table, change_para, change_factor):
 
 	#change in parameter value due to mutation
 	all_previous_para = [v1, v2, v2i, v3, v3i, v4, v5, v5i, v6, v7, v8, k1, k2, k2i, k3, k3i, k4, k5, k5i, k6, k7, k8 ]
-	for i in range(len(change_para)):
-		all_previous_para[i]= change_factor*all_previous_para[i]
+	all_previous_para[change_factor1[0]]= change_factor1[1]*all_previous_para[change_factor1[0]]
+	all_previous_para[change_factor2[0]]= change_factor2[1]*all_previous_para[change_factor2[0]]
 	v1, v2, v2i, v3, v3i, v4, v5, v5i, v6, v7, v8, k1, k2, k2i, k3, k3i, k4, k5, k5i, k6, k7, k8 = all_previous_para
 
 	pmpi = y[0]

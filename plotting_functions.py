@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 
-open_normal = 0  #0 = mutant , 1 = Normal , 2 = light
+open_normal = 2  #0 = mutant , 1 = Normal , 2 = light
 
 if open_normal == 1:
     with open("current_result_log.txt") as original_parameters:
@@ -54,13 +54,13 @@ if open_normal == 0:
     m1 = (k1[:,19]+k1[:,20])/(k1[:,11]+k1[:,12])
     m2 = (k1[:,15]+k1[:,22])/(k1[:,7]+k1[:,14])
     plt.hist(m1,100, alpha=0.5, label='Total PA ')
-    plt.hist(m2,100, alpha=0.5, label='Total PI ')
+    #plt.hist(m2,100, alpha=0.5, label='Total PI ')
     #plt.hist(i1,100, alpha=0.5, label='PMPI ')
     #plt.hist(i2,100, alpha=0.5, label='PI4P ')
     #plt.hist(i3,100, alpha=0.5, label='PIP2 ')
-    plt.hist(i4,100, alpha=0.5, label='DAG')
-    #plt.hist(i5,100, alpha=0.5, label='PMPA ')
-    #plt.hist(i6,100, alpha=0.5, label='ERPA ')
+    #plt.hist(i4,100, alpha=0.5, label='DAG')
+    plt.hist(i5,100, alpha=0.5, label='PMPA ')
+    plt.hist(i6,100, alpha=0.5, label='ERPA ')
     #plt.hist(i7,100, alpha=0.5, label='CDPDAG ')
     #plt.hist(i8,100, alpha=0.5, label='ERPI ')
 
@@ -69,13 +69,13 @@ if open_normal == 2:
     with open("light_recovery.txt") as original_parameters:
         k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
     k2 = np.asarray(k2)
-    k2 = k2[k2[:,5] != 1989 , :]
+    k2 = k2[k2[:,5] == 0.01 , :]
     k1 = k2
-    plt.hist(k1[:,5])
+    plt.hist(k1[:,6],100)
 
-plt.xlabel('70% PIP2 recovery (min)')
+plt.xlabel('Recovery Time (min)')
 plt.ylabel('Frequency')
-plt.title('All parameters less than 10% error')
+plt.title('All parameters with error less than 10%')
 #plt.axhline()
 #plt.axvline()
 #plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))

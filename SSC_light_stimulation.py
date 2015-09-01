@@ -7,7 +7,7 @@ import SSC_initial_conditions, SSC_ode_function, SSC_ode_function, SSC_parameter
 import numpy as np
 from scipy.integrate import odeint
 #Parameter initializing
-pip2_depletion_value_table = [0.16, 1.6 , 8, 12.8] #Values of PIP2 after light stimulation (1%, 10%, 50%, 80%)
+pip2_depletion_value_table = [0.16, 1.6 , 8.0, 12.8] #Values of PIP2 after light stimulation (1%, 10%, 50%, 80%)
 
 #Open parameter values which gave correct results
 with open("current_result_log.txt") as original_parameters:
@@ -16,7 +16,7 @@ with open("current_result_log.txt") as original_parameters:
 para_set = np.asarray(para_set)
 para_set = para_set[para_set[:,0]< 0.1 , :]  #Take only values with error less than 10%
 
-for pip2_depletion_value in range(len(pip2_depletion_value_table)):
+for pip2_depletion_value in pip2_depletion_value_table:
     for para_elements in range(len(para_set)):
 
         current_para_set = para_set[para_elements,:] #Select rows

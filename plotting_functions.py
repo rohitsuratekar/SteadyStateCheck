@@ -69,15 +69,21 @@ if open_normal == 2:
     with open("light_recovery.txt") as original_parameters:
         k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
     k2 = np.asarray(k2)
-    k2 = k2[k2[:,5] == 0.01 , :]
-    k1 = k2
-    plt.hist(k1[:,6],100)
+    k12 = k2[k2[:,5] == 12.8 , :]
+    k8 = k2[k2[:,5] == 8 , :]
+    k16 = k2[k2[:,5] == 1.6 , :]
+    ksmall = k2[k2[:,5] == 0.16 , :]
+    #k1 = k2
+    plt.hist(k12[:,6],100, alpha=0.5, label='20 %')
+    plt.hist(k8[:,6],100, alpha=0.5, label='50 %')
+    plt.hist(k16[:,6],100, alpha=0.5, label='90 %')
+    plt.hist(ksmall[:,6],100, alpha=0.5, label='99 %')
 
 plt.xlabel('Recovery Time (min)')
 plt.ylabel('Frequency')
-plt.title('All parameters with error less than 10%')
+plt.title('Recovery with different amount of PIP2 depletion')
 #plt.axhline()
 #plt.axvline()
-#plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))
+plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))
 plt.savefig('samplefigure.png', bbox_inches='tight')
 plt.show()

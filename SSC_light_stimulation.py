@@ -43,8 +43,6 @@ for pip2_depletion_value in pip2_depletion_value_table:
         #y2 = stimulus_soln[-1,:]
         t2 = np.linspace(time_coord[0], time_coord[3], 10000)
         recovery_soln = odeint(SSC_ode_function.ode_function, y2, t2 , args=(vmax_table,))
-        scaling_soln = odeint(SSC_ode_function.scaling_function, y2, t2 , args=(vmax_table,scaling_factor))
-
         pip2_recovery = recovery_soln[:,2]
         percent90_value = stored_pip2_value*0.9
         recovery_time_array = t2 [pip2_recovery > percent90_value]
@@ -53,8 +51,30 @@ for pip2_depletion_value in pip2_depletion_value_table:
         if len(recovery_time_array) != 0:
             final_recovery_time = recovery_time_array[0]
 
+        #Check for approximate scaling factor
+        scaling_done = 0
+        scaling_factor = [10.0,1.0]
+        scaling_count = 0
+
+        while scaling_done ==1 :
+            scaling_soln = odeint(SSC_ode_function.scaling_function, y2, t2 , args=(vmax_table,scaling_factor))
+            pip2_recovery_in_scaling = scaling_soln[:,2]
+            recovery_time_array_in_scaling = t2 [pip2_recovery_in_scaling > percent90_value]
+            if len(recovery_time_array_in_scaling) == 0:
+                final_recovery_time = 5321
+            if len(recovery_time_array_in_scaling) != 0:
+                final_recovery_time_in_scaling = recovery_time_array_in_scaling[0]
+            if final_recovery_time_in_scaling < 10
+                scaling_done = 1
+            if final_recovery_time_in_scaling > 10
+                scaling_count = scaling_count+1
+                scaling_factor[0] = scaling_factor[0]*10.0
+            if scaling_count > 5
+                scaling_done = 1
+                final_recovery_time_in_scaling = 1235
+
         mfh2 = open('modified_light_recovery.txt','a')
-        things_to_write2 = vmax_table + [pip2_depletion_value] + [final_recovery_time]
+        things_to_write2 = vmax_table + [pip2_depletion_value] + [final_recovery_time] + [final_recovery_time_in_scaling] + scaling_factor
         things_to_write2 = [ float(round(elem1,3)) for elem1 in things_to_write2 ]
         mfh2.write('\t'.join(str(k1) for k1 in things_to_write2))
         mfh2.write('\n')

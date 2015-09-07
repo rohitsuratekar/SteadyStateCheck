@@ -175,7 +175,6 @@ def scaling_function(y, t, vmax_table, scaling_factor):
 	k7 = m2[9]*scaling_factor[1]
 	k8 = m2[10]*scaling_factor[1]
 
-
 	pmpi = y[0]
 	pi4p = y[1]
   	pip2 = y[2]

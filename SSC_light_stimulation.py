@@ -40,7 +40,7 @@ for pip2_depletion_value in pip2_depletion_value_table:
         y2[3] = y2[3]+y[2] - pip2_depletion_value #DAG Value
         y2[2] = pip2_depletion_value #New PIP2 value
         #Recovery phase
-        #y2 = stimulus_soln[-1,:]
+
         t2 = np.linspace(time_coord[0], time_coord[3], 10000)
         recovery_soln = odeint(SSC_ode_function.ode_function, y2, t2 , args=(vmax_table,))
         pip2_recovery = recovery_soln[:,2]
@@ -60,21 +60,22 @@ for pip2_depletion_value in pip2_depletion_value_table:
             scaling_soln = odeint(SSC_ode_function.scaling_function, y2, t2 , args=(vmax_table,scaling_factor))
             pip2_recovery_in_scaling = scaling_soln[:,2]
             recovery_time_array_in_scaling = t2 [pip2_recovery_in_scaling > percent90_value]
+
             if len(recovery_time_array_in_scaling) == 0:
                 final_recovery_time_in_scaling = 5321
             if len(recovery_time_array_in_scaling) != 0:
                 final_recovery_time_in_scaling = recovery_time_array_in_scaling[0]
-            if final_recovery_time_in_scaling < 10:
+            if final_recovery_time_in_scaling < 15:
                 scaling_done = 1
-            if final_recovery_time_in_scaling > 10:
+            if final_recovery_time_in_scaling > 15:
                 scaling_count = scaling_count+1
-                scaling_factor[0] = scaling_factor[0] + 20
+                scaling_factor[0] = scaling_factor[0] + 50.0
             if scaling_count > 10:
                 scaling_done = 1
                 final_recovery_time_in_scaling = 1235
 
         mfh2 = open('with_scaling_factor.txt','a')
-        things_to_write2 = vmax_table + [pip2_depletion_value] + [final_recovery_time] + [final_recovery_time_in_scaling] + scaling_factor
+        things_to_write2 = vmax_table + [pip2_depletion_value] + [final_recovery_time] + [final_recovery_time_in_scaling] + scaling_factor + [pip2_recovery_in_scaling[-1]]
         things_to_write2 = [ float(round(elem1,3)) for elem1 in things_to_write2 ]
         mfh2.write('\t'.join(str(k1) for k1 in things_to_write2))
         mfh2.write('\n')

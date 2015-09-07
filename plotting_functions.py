@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 
-open_normal = 0  #0 = mutant , 1 = Normal , 2 = light, double mutant
+open_normal = 10  #0 = mutant , 1 = Normal , 2 = light, 3 = double mutant, 10 = Random file
 
 if open_normal == 1:
     with open("current_result_log.txt") as original_parameters:
@@ -101,6 +101,24 @@ if open_normal == 3:
     #plt.hist(m2,100, alpha=0.5, label='Total PI ')
     #plt.hist(i1,100, alpha=0.5, label='PMPI ')
     plt.hist(i2,100, alpha=0.5, label='PI4P ')
+    #plt.hist(i3,100, alpha=0.5, label='PIP2 ')
+    #plt.hist(i4,100, alpha=0.5, label='DAG')
+    #plt.hist(i5,100, alpha=0.5, label='PMPA ')
+    #plt.hist(i6,100, alpha=0.5, label='ERPA ')
+    #plt.hist(i7,100, alpha=0.5, label='CDPDAG ')
+    #plt.hist(i8,100, alpha=0.5, label='ERPI ')
+if open_normal == 10:
+    with open("with_scaling_factor.txt") as original_parameters:
+        k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
+    k2 = np.asarray(k2)
+    #k2 = k2[k2[:,6] < 1000 , :] #Mutant factor less than this value
+    #k2 = k2[k2[:,6] == 1 , :] #Enzyme 1
+    #k2 = k2[k2[:,8] != 1 , :] #Enzyme 2
+    k1 = k2
+    #plt.hist(m1,100, alpha=0.5, label='Total PA ')
+    #plt.hist(m2,100, alpha=0.5, label='Total PI ')
+    #plt.hist(i1,100, alpha=0.5, label='PMPI ')
+    plt.hist(k2[:,6],100, alpha=0.5, label='factor ')
     #plt.hist(i3,100, alpha=0.5, label='PIP2 ')
     #plt.hist(i4,100, alpha=0.5, label='DAG')
     #plt.hist(i5,100, alpha=0.5, label='PMPA ')

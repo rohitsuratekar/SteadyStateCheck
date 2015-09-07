@@ -34,9 +34,6 @@ for pip2_depletion_value in pip2_depletion_value_table:
         soln = odeint(SSC_ode_function.ode_function, y, t , args=(vmax_table,))
         stored_pip2_value = soln[-1,2]
         #Light Stimulation
-        #y1 = soln[-1,:]  #Get all final concentrations, This will initial condition for next step
-        #t1 = np.linspace(time_coord[0], time_coord[2], 100)
-        #stimulus_soln = odeint(SSC_ode_function.light_ode, y1, t1 , args=(vmax_table,stimulation_factor))
 
         #infinite Vmax of PLC
         y2=soln[-1,:]
@@ -46,12 +43,13 @@ for pip2_depletion_value in pip2_depletion_value_table:
         #y2 = stimulus_soln[-1,:]
         t2 = np.linspace(time_coord[0], time_coord[3], 10000)
         recovery_soln = odeint(SSC_ode_function.ode_function, y2, t2 , args=(vmax_table,))
+        scaling_soln = odeint(SSC_ode_function.scaling_function, y2, t2 , args=(vmax_table,scaling_factor))
 
         pip2_recovery = recovery_soln[:,2]
         percent90_value = stored_pip2_value*0.9
         recovery_time_array = t2 [pip2_recovery > percent90_value]
         if len(recovery_time_array) == 0:
-            final_recovery_time = 1989
+            final_recovery_time = 5321
         if len(recovery_time_array) != 0:
             final_recovery_time = recovery_time_array[0]
 

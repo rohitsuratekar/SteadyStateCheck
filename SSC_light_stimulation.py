@@ -56,24 +56,24 @@ for pip2_depletion_value in pip2_depletion_value_table:
         scaling_factor = [10.0,1.0]
         scaling_count = 0
 
-        while scaling_done ==1 :
+        while scaling_done ==0 :
             scaling_soln = odeint(SSC_ode_function.scaling_function, y2, t2 , args=(vmax_table,scaling_factor))
             pip2_recovery_in_scaling = scaling_soln[:,2]
             recovery_time_array_in_scaling = t2 [pip2_recovery_in_scaling > percent90_value]
             if len(recovery_time_array_in_scaling) == 0:
-                final_recovery_time = 5321
+                final_recovery_time_in_scaling = 5321
             if len(recovery_time_array_in_scaling) != 0:
                 final_recovery_time_in_scaling = recovery_time_array_in_scaling[0]
-            if final_recovery_time_in_scaling < 10
+            if final_recovery_time_in_scaling < 10:
                 scaling_done = 1
-            if final_recovery_time_in_scaling > 10
+            if final_recovery_time_in_scaling > 10:
                 scaling_count = scaling_count+1
-                scaling_factor[0] = scaling_factor[0]*10.0
-            if scaling_count > 5
+                scaling_factor[0] = scaling_factor[0] + 20
+            if scaling_count > 10:
                 scaling_done = 1
                 final_recovery_time_in_scaling = 1235
 
-        mfh2 = open('modified_light_recovery.txt','a')
+        mfh2 = open('with_scaling_factor.txt','a')
         things_to_write2 = vmax_table + [pip2_depletion_value] + [final_recovery_time] + [final_recovery_time_in_scaling] + scaling_factor
         things_to_write2 = [ float(round(elem1,3)) for elem1 in things_to_write2 ]
         mfh2.write('\t'.join(str(k1) for k1 in things_to_write2))

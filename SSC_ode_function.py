@@ -160,7 +160,7 @@ def scaling_function(y, t, vmax_table, scaling_factor):
 	v5i = vmax_table[4]*scaling_factor[0]
 	v1 = (10.0*v5*v2)/((125.0*v2) - v5)  #Assuming Km of PITP is 10 times others
 	v3 = (20.0*v5)/(125.0)
-	v4 = v3*scaling_factor[0]
+	v4 = v3
 	v6 = (5.98*v5*v7)/((125.0*v7) - (5.98*v5))
 
 	k1 = m2[0]*scaling_factor[1]

@@ -118,7 +118,7 @@ if open_normal == 10:
     #plt.hist(m1,100, alpha=0.5, label='Total PA ')
     #plt.hist(m2,100, alpha=0.5, label='Total PI ')
     #plt.hist(i1,100, alpha=0.5, label='PMPI ')
-    plt.hist(k2[:,6],100, alpha=0.5, label='factor ')
+    plt.hist(k2[:,8],100, alpha=0.5, label='factor ')
     #plt.hist(i3,100, alpha=0.5, label='PIP2 ')
     #plt.hist(i4,100, alpha=0.5, label='DAG')
     #plt.hist(i5,100, alpha=0.5, label='PMPA ')

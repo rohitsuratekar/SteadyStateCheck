@@ -37,7 +37,7 @@ for pip2_depletion_value in pip2_depletion_value_table:
 
         #infinite Vmax of PLC
         y2=soln[-1,:]
-        y2[3] = y2[3]+y[2] - pip2_depletion_value #DAG Value
+        y2[3] = y2[3]+ y[2] - pip2_depletion_value #DAG Value
         y2[2] = pip2_depletion_value #New PIP2 value
         #Recovery phase
 
@@ -69,8 +69,8 @@ for pip2_depletion_value in pip2_depletion_value_table:
                 scaling_done = 1
             if final_recovery_time_in_scaling > 15:
                 scaling_count = scaling_count+1
-                scaling_factor[0] = scaling_factor[0] + 50.0
-            if scaling_count > 10:
+                scaling_factor[0] = scaling_factor[0] + 50
+            if scaling_count > 13:
                 scaling_done = 1
                 final_recovery_time_in_scaling = 1235
 

@@ -113,12 +113,12 @@ if open_normal == 10:
     k2 = np.asarray(k2)
     #k2 = k2[k2[:,6] < 1000 , :] #Mutant factor less than this value
     #k2 = k2[k2[:,6] == 1 , :] #Enzyme 1
-    #k2 = k2[k2[:,8] != 1 , :] #Enzyme 2
+    #k2 = k2[k2[:,5] == 8 , :] #Enzyme 2
     k1 = k2
     #plt.hist(m1,100, alpha=0.5, label='Total PA ')
     #plt.hist(m2,100, alpha=0.5, label='Total PI ')
     #plt.hist(i1,100, alpha=0.5, label='PMPI ')
-    plt.hist(k2[:,8],100, alpha=0.5, label='factor ')
+    plt.hist(k2[:,6],100, alpha=0.5, label='Factor')
     #plt.hist(i3,100, alpha=0.5, label='PIP2 ')
     #plt.hist(i4,100, alpha=0.5, label='DAG')
     #plt.hist(i5,100, alpha=0.5, label='PMPA ')

@@ -17,7 +17,7 @@ v5_range  = np.linspace(0.01, 10, 100)  #DAGK Range
 v2_range  = np.linspace(0.01, 10, 100)  #PI4K Range
 v5i_range  = np.linspace(0.01, 10, 100)  #LAZA Range
 v8_range  = np.linspace(0.01, 10, 100)  #PIS Range
-
+conditions_true = 0 #Initialization
 for temp_v4 in v4_range:
     for temp_v5 in v5_range:
         for temp_v2 in v2_range:
@@ -29,7 +29,14 @@ for temp_v4 in v4_range:
                     v5i = temp_v5i #LAZA
                     v8 = temp_v8 #PIS
                     v_reversible = 0.01
-                    condition1 = (20.0*v2) - v4
+                    
+                    #Check conditions if given parameters are giving any negative values
+                    if ((20.0*v2) - v4) > 0 :
+                        if ((25.0*v4) - (4.0*v5)) > 0 :
+                            temp_value1 = v5i/(1 - ((4.0*v5)/(25.0*v4)))
+                            if ((3.34*temp_value1)-v4) > 0 :
+                                conditions_true = 1
+
                     if conditions_true == 1:
                         vmax_table = [v2,v4,v5,v5i,v8,v_reversible] #Rest of Vmax will be set according to these values
                         y = SSC_initial_conditions.initial_conditions_vector()     # initial condition vector

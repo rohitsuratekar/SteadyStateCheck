@@ -151,17 +151,16 @@ def scaling_function(y, t, vmax_table, scaling_factor):
 
 def ode_function_lazaro(y, t, vmax_table):
 	v2 = vmax_table[0]
-	v5 = vmax_table[1]
-	v7 = vmax_table[2]
-	v8 = vmax_table[3]
-	v2i = vmax_table[4]
-	v3i = vmax_table[4]
-	v5i = vmax_table[4]
-	v1 = (10.0*v5*v2)/((125.0*v2) - v5)  #Assuming Km of PITP is 10 times others
-	v3 = (20.0*v5)/(125.0)
-	v4 = v3
-	v6 = (5.98*v5*v7)/((125.0*v7) - (5.98*v5))
-
+	v4 = vmax_table[1]
+	v5 = vmax_table[2]
+	v5i = vmax_table[3]
+	v8 = vmax_table[4]
+	v3i = vmax_table[5]
+	v2i = vmax_table[5]
+	v1 = (10.0*v4*v2)/((20.0*v2) - v4) #PITP assuming Km value is 10 times other
+	v3 = v4
+	v6 = v5i/(1 - ((4.0*v5)/(25.0*v4)))
+	v7 = (v4*v6)/((3.34*v6) - v4)
 	k1 = m2[0]
 	k2 = m2[1]
 	k2i = m2[2]

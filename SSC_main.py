@@ -29,7 +29,7 @@ for temp_v4 in v4_range:
                     v5i = temp_v5i #LAZA
                     v8 = temp_v8 #PIS
                     v_reversible = 0.01
-                    
+
                     #Check conditions if given parameters are giving any negative values
                     if ((20.0*v2) - v4) > 0 :
                         if ((25.0*v4) - (4.0*v5)) > 0 :
@@ -42,7 +42,7 @@ for temp_v4 in v4_range:
                         y = SSC_initial_conditions.initial_conditions_vector()     # initial condition vector
                         time_coord = SSC_initial_conditions.time_conditions()
                         t  = np.linspace(time_coord[0], time_coord[1], 10000)   # time grid
-                        soln = odeint(SSC_ode_function.ode_function, y, t , args=(vmax_table,))
+                        soln = odeint(SSC_ode_function.ode_function_lazaro, y, t , args=(vmax_table,))
                         pPMPI = soln[:, 0]
                         pPI4P = soln[:, 1]
                         pPIP2 = soln[:, 2]
@@ -100,7 +100,7 @@ for temp_v4 in v4_range:
                         ferror = ferror + 415 + penalty_error
 
                         #Saving results
-                        fh2 = open('current_result_log.txt','a')
+                        fh2 = open('lazaro_result_log.txt','a')
                         write_con = np.array(all_concentrations_main).tolist()
                         things_to_write = [ferror] + vmax_table + error_details + write_con
                         things_to_write = [ float(round(elem1,3)) for elem1 in things_to_write ]

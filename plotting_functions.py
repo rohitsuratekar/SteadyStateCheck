@@ -109,33 +109,25 @@ if open_normal == 3:
     #plt.hist(i7,100, alpha=0.5, label='CDPDAG ')
     #plt.hist(i8,100, alpha=0.5, label='ERPI ')
 if open_normal == 10:
-    with open("new_scaling_factor.txt") as original_parameters:
+    with open("km_scaling_factor.txt") as original_parameters:
         k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
     k2 = np.asarray(k2)
     #k2 = k2[k2[:,6] < 1000 , :] #Mutant factor less than this value
     #k2 = k2[k2[:,6] == 1 , :] #Enzyme 1
-    k2 = k2[k2[:,7] <100 , :] #Enzyme 2
+    #k2 = k2[k2[:,7] <100 , :] #Enzyme 2
     k1 = k2
-    #plt.hist(m1,100, alpha=0.5, label='Total PA ')
-    #plt.hist(m2,100, alpha=0.5, label='Total PI ')
-    #plt.hist(i1,100, alpha=0.5, label='PMPI ')
-    plt.scatter(k2[:,6],k2[:,8])
+    #plt.scatter(k2[:,6],k2[:,8])
 
     #plt.scatter(k2[:,1],k2[:,8],color = 'b', label='DGK',alpha=1)
     #plt.scatter((20.0*k2[:,1])/(125.0),k2[:,8],color = 'r', label='PIP5K',alpha=1)
     #plt.scatter(k2[:,2],k2[:,8],color = 'g', label='CDS',alpha=1)
     #plt.scatter(k2[:,3],k2[:,8],color = 'r', label='PIS',alpha=1)
-    #plt.hist(k2[:,8],100, alpha=0.5, label='Factor')
-    #plt.hist(i3,100, alpha=0.5, label='PIP2 ')
-    #plt.hist(i4,100, alpha=0.5, label='DAG')
-    #plt.hist(i5,100, alpha=0.5, label='PMPA ')
-    #plt.hist(i6,100, alpha=0.5, label='ERPA ')
-    #plt.hist(i7,100, alpha=0.5, label='CDPDAG ')
-    #plt.hist(i8,100, alpha=0.5, label='ERPI ')
+    plt.hist(k2[:,10],100, alpha=0.5)
 
-plt.xlabel('Recovery time (min) without respective multiplication factor')
-plt.ylabel('Multiplication Factor to get recovery time to 9.5 min')
-#plt.title('Correlation between Multiplication factor and Vmax')
+
+plt.xlabel('Multiplication Factor')
+plt.ylabel('Frequency')
+plt.title('With PIP2 depletion upto 99% and 90%')
 #plt.axhline()
 #plt.axvline()
 #plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))

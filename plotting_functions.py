@@ -2,13 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 
-open_normal = 10  #0 = mutant , 1 = Normal , 2 = light, 3 = double mutant, 10 = Random file
+open_normal = 1  #0 = mutant , 1 = Normal , 2 = light, 3 = double mutant, 10 = Random file
 
 if open_normal == 1:
-    with open("current_result_log.txt") as original_parameters:
+    with open("lazaro_result_log.txt") as original_parameters:
         k2 = [[float(digit) for digit in line.split()] for line in original_parameters]
     k2 = np.asarray(k2)
-    k2 = k2[k2[:,0]< 0.1 , :]
+    k2 = k2[k2[:,0] < 0.1 , :]
 #    k2 = k2[k2[:,15] > 28.2 , :]
 #    k2 = k2[k2[:,15] < 28.7 , :]
     k1 = k2
@@ -20,19 +20,20 @@ if open_normal == 1:
     #plt.scatter(k1[:,12],k1[:,0],color = 'g', label='PIP2',alpha=1)
     #plt.scatter(k1[:,13],k1[:,0],color = 'm', label='DAG',alpha=1)
 
-    #plt.scatter(k1[:,0],k1[:,4],color = 'r', label='Error',alpha=1)
-    #plt.scatter(k1[:,10],k1[:,14])
-    #plt.hist(k1[:,6],100, alpha=0.5, label='Error From PIP2')
-    #plt.hist(k1[:,7],100, alpha=0.5, label='Error From PI4P')
-    #plt.hist(k1[:,8],100, alpha=0.5, label='Error From PA ')
-    #plt.hist(k1[:,9],100, alpha=0.5, label='Error From DAG')
-    #plt.hist(k1[:,10],100, alpha=0.5, label='PMPI')
-    #plt.hist(k1[:,11],100, alpha=0.5, label='PI4P')
-    #plt.hist(k1[:,12],100, alpha=0.5, label='PIP2')
-    #plt.hist(k1[:,13],100, alpha=0.5, label='DAG')
-    #plt.hist(k1[:,15],100, alpha=0.5, label='ERPA')
-    #plt.hist(k1[:,14],100, alpha=0.5, label='PMPA')
-    #plt.hist(k1[:,16],100, alpha=0.6, label='CDPDAG')
+    #plt.hist(k1[:,0],100,color = 'r', label='Error',alpha=1)
+    #plt.scatter(k1[:,15],k1[:,16])
+    #plt.hist(k1[:,7],100, alpha=0.5, label='Error From PIP2')
+    #plt.hist(k1[:,8],100, alpha=0.5, label='Error From PI4P')
+    #plt.hist(k1[:,9],100, alpha=0.5, label='Error From PA ')
+    #plt.hist(k1[:,10],100, alpha=0.5, label='Error From DAG')
+    #plt.hist(k1[:,11],100, alpha=0.5, label='PMPI')
+    #plt.hist(k1[:,12],100, alpha=0.5, label='PI4P')
+    #plt.hist(k1[:,13],100, alpha=0.5, label='PIP2')
+    #plt.hist(k1[:,14],100, alpha=0.5, label='DAG')
+    plt.hist(k1[:,4],100, alpha=0.5, label='PMPA')
+    #plt.hist(k1[:,16],100, alpha=0.5, label='ERPA')
+    #plt.hist(k1[:,17],100, alpha=0.6, label='CDPDAG')
+    #plt.hist(k1[:,18],100, alpha=0.6, label='ERPI')
 
 
 #print k1
@@ -125,11 +126,11 @@ if open_normal == 10:
     plt.hist(k2[:,10],100, alpha=0.5)
 
 
-plt.xlabel('Multiplication Factor')
+plt.xlabel('Concentration')
 plt.ylabel('Frequency')
-plt.title('With PIP2 depletion upto 99% and 90%')
+plt.title('Single reversible')
 #plt.axhline()
 #plt.axvline()
-#plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))
+plt.legend(loc='upper left', bbox_to_anchor=(1, 0.5))
 plt.savefig('samplefigure.png', bbox_inches='tight')
 plt.show()
